@@ -1,4 +1,4 @@
-export  async function getPlayer () {
+export  async function getAllPlayers () {
   try{
     let response = await fetch (`https://www.balldontlie.io/api/v1/players/`)
     let playerData;
