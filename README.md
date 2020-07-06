@@ -22,7 +22,7 @@
 
 | Spec 	| Input 	| Output 	|
 |-	|-	|-	|
-
+some changes to some stuff to test merging branches|change|hopefully we don't break anything
 
 <br>
 
