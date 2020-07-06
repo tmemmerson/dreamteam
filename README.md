@@ -8,7 +8,7 @@
 
 *EDIT* #### __	
 
-#### By _**Tristan Emmerson**_
+#### By _**Tristan Emmerson, Johnny Duverseau, Ben White, Teresa Rosinksi**_
 
 <br>
 
