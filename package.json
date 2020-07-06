@@ -36,8 +36,8 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1"
   },
-    "repository": {
+  "repository": {
     "type": "git",
-    "url": ""
-}
+    "url": "git://github.com/tmemmerson/project.git"
+  }
 }
