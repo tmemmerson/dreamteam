@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {getPlayerNameIdPos, search} from './call.js';
+import { newWrapper } from './call.js';
 
 
 
@@ -17,6 +17,14 @@ async function parseData() {
   }
 }
 */
+//console.log(await getPlayerNameIdPos());
+
+async function doThing() {
+
+  console.log(await newWrapper());
+}
+
+doThing();
 
 $(document).ready(function(){
   

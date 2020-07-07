@@ -1,34 +1,10 @@
-/*
-export  async function getPlayerByName (playerName) {
-  try{
-    let response = await fetch (`https://www.balldontlie.io/api/v1/players/?search=${playerName}`);
-    let playerData;
-    let playerIds;
-    if (response.ok && response.status == 200){
-      playerData = await response.json();
-      console.log(playerData);
-      console.log(playerData.data);
-      playerIds = playerData.data.map(player => {
-        console.log(player.id);
-        return player.id;
-      });
-      console.log(playerIds);
-    }else {
-      playerData = false;
-      console.log(`response: ${response}`);
-    }
-    return playerData.data;
-  }catch(error){
-    console.log(`error: ${error}`);
-    return false;
-  }
-}
-*/
+
 export async function getPlayerNameIdPos () {
+  console.log("lol");
   try{
-    let currentPage = 0;
+    let currentPage = 28;
     let playerData;
-    let playerIdsAndNames =[];
+    let playerIdsAndNames = [];
     do {
       let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=${currentPage}`);
       currentPage++;
@@ -43,70 +19,58 @@ export async function getPlayerNameIdPos () {
             team_name: player.team.abbreviation,
             team_Id: player.team.id
           };
+
           return newPlayer;
         });
-
-        console.log(playerIdsAndNames);
+        
       } else {
         playerData = false;
         console.log(`response: ${response}`);
       }
     } while (playerData.meta.next_page);
+    return playerIdsAndNames;
   }catch(error){
     console.log(`error: ${error}`);
     return false;
   }
 }
-let allPlayers = getPlayerNameIdPos(); // an array of objects 
-console.log(allPlayers);
-//get players by position 
-/*
-function search (allPlayers, positionSearched){
-  let playersToDisplay=[];
-  for (let i=0; i<allPlayers.length; i++) {
-    if (positionSearched === allPlayers.newPlayer.position){
-      playersToDisplay.push(newPlayer);
+
+
+export async function newWrapper (){
+  let allPlayers = await getPlayerNameIdPos(); // an array of objects 
+  console.log(allPlayers);
+  //get players by position 
+  let forwards = [];
+  let guards = [];
+  let centers=  [];
+  let guardCenters=  [];
+  let guardForwards=  [];
+  let forwardCenters=  [];
+  let forwardCen=  [];
+  allPlayers.forEach(function(player) {
+    if (player.position === 'F') {
+      forwards.push(player);
     }
-    console.log(playersToDisplay);
-  }
-
-  console.log(search(allPlayers, "f"));
-
-//Send stats api call based on position
-
-
-export async function getStatsPerPlayer(allPlayers,position, name){
-  try{
-    let position;
-    for(let i=0; i<allPlayers.position.length; )
-
-    let statResponse = await fetch
-
-  }
-}
-
-// console.log(getPlayerNameIdPos());
-
-/*
-export async function getStatsForPlayer(await getAllPlayers(playerName)){
-  try{
-  let statsResponse = await fetch (`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerIds}`);
-  let playerStats;
-  if(statsResponse.ok && statsResponse == 200) {
-    playerStats = await statsResponse.json();
-    console.log(playerStats)
-    return playerStats;
-  } else {
-    playerStats = false; 
-    console.log(statsResponse);
-  }
-  return playerStats;
-  }catch(error){
-  console.log(`error: ${error}`);
-  return false;
+    if (player.position === 'GF') {
+      guards.push(player);
+    }
+    if (player.position === 'C') {
+      centers.push(player);
+    }
+    if (player.position === 'F-C' || player.position === 'C-F') {
+      centers.push(player);
+    }
+    if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
+      centers.push(player);
+    }
+    if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
+      centers.push(player);
+    }
+  });
+  return {
+    forwards: forwards, 
+    guards: guards, 
+    centers: centers
   }
 }
 
-console.log(getStatsForPlayer(await getAllPlayers('Lebron')));
-*/
-//Now we have an array of players and we need to display the player name, id, and team to the webpage

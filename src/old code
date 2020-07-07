@@ -1,0 +1,67 @@
+function search (allPlayers, positionSearched){
+  let playersToDisplay=[];
+  for (let i=0; i<allPlayers.length; i++) {
+    if (positionSearched === allPlayers.newPlayer.position){
+      playersToDisplay.push(newPlayer);
+    }
+    console.log(playersToDisplay);
+  }
+export async function getStatsPerPlayer(allPlayers,position, name){
+  try{
+    let position;
+    for(let i=0; i<allPlayers.position.length; )
+
+    let statResponse = await fetch
+
+  }
+}
+
+/*
+export  async function getPlayerByName (playerName) {
+  try{
+    let response = await fetch (`https://www.balldontlie.io/api/v1/players/?search=${playerName}`);
+    let playerData;
+    let playerIds;
+    if (response.ok && response.status == 200){
+      playerData = await response.json();
+      console.log(playerData);
+      console.log(playerData.data);
+      playerIds = playerData.data.map(player => {
+        console.log(player.id);
+        return player.id;
+      });
+      console.log(playerIds);
+    }else {
+      playerData = false;
+      console.log(`response: ${response}`);
+    }
+    return playerData.data;
+  }catch(error){
+    console.log(`error: ${error}`);
+    return false;
+  }
+}
+*/
+
+/*
+export async function getStatsForPlayer(await getAllPlayers(playerName)){
+  try{
+  let statsResponse = await fetch (`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerIds}`);
+  let playerStats;
+  if(statsResponse.ok && statsResponse == 200) {
+    playerStats = await statsResponse.json();
+    console.log(playerStats)
+    return playerStats;
+  } else {
+    playerStats = false; 
+    console.log(statsResponse);
+  }
+  return playerStats;
+  }catch(error){
+  console.log(`error: ${error}`);
+  return false;
+  }
+}
+
+console.log(getStatsForPlayer(await getAllPlayers('Lebron')));
+*/
