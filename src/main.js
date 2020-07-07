@@ -2,22 +2,24 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {getPlayer} from './call.js';
+import {getPlayerNameIdPos} from './call.js';
 
-const players = getPlayers();
+// const players = getPlayers();
 
-players.data = [
-  {
-    id: 14,
-  },
-  {
-    id: 15
-  }
-]
+// players.data = [
+//   {
+//     id: 14,
+//   },
+//   {
+//     id: 15
+//   }
+// ]
 
-const searchedPlayer = players.data.find(player => {
-  player.id === 14
-})
+// const searchedPlayer = players.data.find(player => {
+//   player.id === 14
+// })
+
+console.log(getPlayerNameIdPos());
 
 /*
 async function parseData() {
@@ -31,6 +33,6 @@ async function parseData() {
 */
 
 $(document).ready(function(){
-  $
+  
 });
 
