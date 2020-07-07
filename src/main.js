@@ -32,6 +32,4 @@ async function parseData() {
 $(document).ready(function(){
   $
 });
-console.log(getAllPlayers());
 
-console.log(parseData());
