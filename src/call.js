@@ -34,8 +34,6 @@ export async function getPlayerNameIdPos () {
       currentPage++;
       if (response.ok && response.status == 200){
         playerData = await response.json();
-        //console.log(playerData);
-        //console.log(playerData.data);
         playerIdsAndNames = playerData.data.map(player => {
           const newPlayer = {
             Id: player.id, 
@@ -45,16 +43,13 @@ export async function getPlayerNameIdPos () {
             team_name: player.team.abbreviation,
             team_Id: player.team.id
           };
-          //console.log(playerIdsAndNames);
           return newPlayer;
         });
-
         console.log(playerIdsAndNames);
       } else {
         playerData = false;
         console.log(`response: ${response}`);
       }
-      // return playerData.data;
     } while (playerData.meta.next_page);
   }catch(error){
     console.log(`error: ${error}`);
