@@ -33,17 +33,18 @@ export async function getPlayerNameIdPos () {
       playerData = await response.json();
       //console.log(playerData);
       //console.log(playerData.data);
-      playerIdsAndNames.push(playerData.data.map(player => {
+      playerIdsAndNames = playerData.data.map(player => {
         const newPlayer = {
-          id: player.id, 
+          Id: player.id, 
           first_name: player.first_name, 
           last_name: player.last_name,
           position: player.position,
           team_name: player.team.abbreviation,
           team_Id: player.team.id
         };
+        //console.log(playerIdsAndNames);
         return newPlayer;
-      }));
+      });
 
       console.log(playerIdsAndNames);
     }else {
