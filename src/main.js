@@ -4,22 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import {getPlayer} from './call.js';
 
-const players = getPlayers();
-
-players.data = [
-  {
-    id: 14,
-  },
-  {
-    id: 15
-  }
-]
-
+/* not being used
 const searchedPlayer = players.data.find(player => {
   player.id === 14
 })
+*/
 
-/*
+/* Not being used yet
 async function parseData() {
   const playerData = await getAllPlayers(); // calls all the player data
   if(playerData === false) {
