@@ -2,13 +2,10 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {getPlayer} from './call.js';
+import {getPlayerNameIdPos, search} from './call.js';
 
-/* not being used
-const searchedPlayer = players.data.find(player => {
-  player.id === 14
-})
-*/
+
+
 
 /* Not being used yet
 async function parseData() {
@@ -22,6 +19,6 @@ async function parseData() {
 */
 
 $(document).ready(function(){
-  $
+  
 });
 

@@ -26,39 +26,66 @@ export  async function getPlayerByName (playerName) {
 */
 export async function getPlayerNameIdPos () {
   try{
-    let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=0`);
+    let currentPage = 0;
     let playerData;
     let playerIdsAndNames =[];
-    if (response.ok && response.status == 200){
-      playerData = await response.json();
-      //console.log(playerData);
-      //console.log(playerData.data);
-      playerIdsAndNames = playerData.data.map(player => {
-        const newPlayer = {
-          Id: player.id, 
-          first_name: player.first_name, 
-          last_name: player.last_name,
-          position: player.position,
-          team_name: player.team.abbreviation,
-          team_Id: player.team.id
-        };
-        //console.log(playerIdsAndNames);
-        return newPlayer;
-      });
+    do {
+      let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=${currentPage}`);
+      currentPage++;
+      if (response.ok && response.status == 200){
+        playerData = await response.json();
+        playerIdsAndNames = playerData.data.map(player => {
+          const newPlayer = {
+            Id: player.id, 
+            first_name: player.first_name, 
+            last_name: player.last_name,
+            position: player.position,
+            team_name: player.team.abbreviation,
+            team_Id: player.team.id
+          };
+          return newPlayer;
+        });
 
-      console.log(playerIdsAndNames);
-    }else {
-      playerData = false;
-      console.log(`response: ${response}`);
-    }
-    return playerData.data;
+        console.log(playerIdsAndNames);
+      } else {
+        playerData = false;
+        console.log(`response: ${response}`);
+      }
+    } while (playerData.meta.next_page);
   }catch(error){
     console.log(`error: ${error}`);
     return false;
   }
 }
+let allPlayers = getPlayerNameIdPos(); // an array of objects 
+console.log(allPlayers);
+//get players by position 
+/*
+function search (allPlayers, positionSearched){
+  let playersToDisplay=[];
+  for (let i=0; i<allPlayers.length; i++) {
+    if (positionSearched === allPlayers.newPlayer.position){
+      playersToDisplay.push(newPlayer);
+    }
+    console.log(playersToDisplay);
+  }
 
-console.log(getPlayerNameIdPos());
+  console.log(search(allPlayers, "f"));
+
+//Send stats api call based on position
+
+
+export async function getStatsPerPlayer(allPlayers,position, name){
+  try{
+    let position;
+    for(let i=0; i<allPlayers.position.length; )
+
+    let statResponse = await fetch
+
+  }
+}
+
+// console.log(getPlayerNameIdPos());
 
 /*
 export async function getStatsForPlayer(await getAllPlayers(playerName)){
@@ -83,4 +110,3 @@ export async function getStatsForPlayer(await getAllPlayers(playerName)){
 console.log(getStatsForPlayer(await getAllPlayers('Lebron')));
 */
 //Now we have an array of players and we need to display the player name, id, and team to the webpage
-
