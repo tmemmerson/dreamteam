@@ -1,34 +1,9 @@
-/*
-export  async function getPlayerByName (playerName) {
+
+export async function getPlayerNameIdPos () {
   try{
-    let response = await fetch (`https://www.balldontlie.io/api/v1/players/?search=${playerName}`);
+    let currentPage = 15;
     let playerData;
-    let playerIds;
-    if (response.ok && response.status == 200){
-      playerData = await response.json();
-      console.log(playerData);
-      console.log(playerData.data);
-      playerIds = playerData.data.map(player => {
-        console.log(player.id);
-        return player.id;
-      });
-      console.log(playerIds);
-    }else {
-      playerData = false;
-      console.log(`response: ${response}`);
-    }
-    return playerData.data;
-  }catch(error){
-    console.log(`error: ${error}`);
-    return false;
-  }
-}
-*/
-async function getPlayerNameIdPos () {
-  try{
-    let currentPage = 5;
-    let playerData;
-    let playerIdsAndNames =[];
+    let playerIdsAndNames = [];
     do {
       let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=${currentPage}`);
       currentPage++;
@@ -49,6 +24,7 @@ async function getPlayerNameIdPos () {
         playerData = false;
         console.log(`response: ${response}`);
       }
+
     } while (playerData.meta.next_page);
     return playerIdsAndNames;
   }catch(error){
@@ -127,8 +103,4 @@ export async function getStatsForPlayer(await getAllPlayers(playerName)){
   return false;
   }
 }
-
-console.log(getStatsForPlayer(await getAllPlayers('Lebron')));
 */
-//Now we have an array of players and we need to display the player name, id, and team to the webpage
-

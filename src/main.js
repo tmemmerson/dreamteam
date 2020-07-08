@@ -31,8 +31,14 @@ async function parseData() {
   }
 }
 */
+//console.log(await getPlayerNameIdPos());
+
+// async function doThing() {
+//   console.log(await sortPlayersByPosition());
+// }
+
+// doThing();
 
 $(document).ready(function(){
   
 });
-
