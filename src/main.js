@@ -2,15 +2,26 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {getPlayer} from './call.js';
+import {getPlayerNameIdPos} from './call.js';
 
-/* not being used
-const searchedPlayer = players.data.find(player => {
-  player.id === 14
-})
-*/
+// const players = getPlayers();
 
-/* Not being used yet
+// players.data = [
+//   {
+//     id: 14,
+//   },
+//   {
+//     id: 15
+//   }
+// ]
+
+// const searchedPlayer = players.data.find(player => {
+//   player.id === 14
+// })
+
+console.log(getPlayerNameIdPos());
+
+/*
 async function parseData() {
   const playerData = await getAllPlayers(); // calls all the player data
   if(playerData === false) {
@@ -22,6 +33,6 @@ async function parseData() {
 */
 
 $(document).ready(function(){
-  $
+  
 });
 

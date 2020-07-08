@@ -26,39 +26,38 @@ export  async function getPlayerByName (playerName) {
 */
 export async function getPlayerNameIdPos () {
   try{
-    let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=0`);
+    let currentPage = 0;
     let playerData;
     let playerIdsAndNames =[];
-    if (response.ok && response.status == 200){
-      playerData = await response.json();
-      //console.log(playerData);
-      //console.log(playerData.data);
-      playerIdsAndNames = playerData.data.map(player => {
-        const newPlayer = {
-          Id: player.id, 
-          first_name: player.first_name, 
-          last_name: player.last_name,
-          position: player.position,
-          team_name: player.team.abbreviation,
-          team_Id: player.team.id
-        };
-        //console.log(playerIdsAndNames);
-        return newPlayer;
-      });
-
-      console.log(playerIdsAndNames);
-    }else {
-      playerData = false;
-      console.log(`response: ${response}`);
-    }
-    return playerData.data;
+    do {
+      let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=${currentPage}`);
+      currentPage++;
+      if (response.ok && response.status == 200){
+        playerData = await response.json();
+        playerIdsAndNames = playerData.data.map(player => {
+          const newPlayer = {
+            Id: player.id, 
+            first_name: player.first_name, 
+            last_name: player.last_name,
+            position: player.position,
+            team_name: player.team.abbreviation,
+            team_Id: player.team.id
+          };
+          return newPlayer;
+        });
+        console.log(playerIdsAndNames);
+      } else {
+        playerData = false;
+        console.log(`response: ${response}`);
+      }
+    } while (playerData.meta.next_page);
   }catch(error){
     console.log(`error: ${error}`);
     return false;
   }
 }
 
-console.log(getPlayerNameIdPos());
+// console.log(getPlayerNameIdPos());
 
 /*
 export async function getStatsForPlayer(await getAllPlayers(playerName)){
