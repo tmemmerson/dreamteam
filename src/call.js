@@ -9,7 +9,7 @@ export async function getPlayerNameIdPos () {
       currentPage++;
       if (response.ok && response.status == 200){
         playerData = await response.json();
-        playerIdsAndNames = playerData.data.map(player => {
+        playerIdsAndNames = playerIdsAndNames.concat(playerData.data.map(player => {
           const newPlayer = {
             Id: player.id, 
             first_name: player.first_name, 
@@ -21,7 +21,7 @@ export async function getPlayerNameIdPos () {
           //console.log(playerIdsAndNames);being called successfully //returns thousands
           //console.log(newPlayer); New players being created successfully
           return newPlayer;
-        });        
+        }));        
       } else {
         playerData = false;
         console.log(`response: ${response}`);
