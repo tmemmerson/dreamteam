@@ -2,26 +2,9 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import {getPlayerNameIdPos} from './call.js';
+import {sortPlayersByPosition } from './call.js';
 
-// const players = getPlayers();
-
-// players.data = [
-//   {
-//     id: 14,
-//   },
-//   {
-//     id: 15
-//   }
-// ]
-
-// const searchedPlayer = players.data.find(player => {
-//   player.id === 14
-// })
-
-console.log(getPlayerNameIdPos());
-
-/*
+/* Not being used yet
 async function parseData() {
   const playerData = await getAllPlayers(); // calls all the player data
   if(playerData === false) {
@@ -31,8 +14,14 @@ async function parseData() {
   }
 }
 */
+//console.log(await getPlayerNameIdPos());
+
+async function doThing() {
+  console.log(await sortPlayersByPosition());
+}
+
+doThing();
 
 $(document).ready(function(){
   
 });
-
