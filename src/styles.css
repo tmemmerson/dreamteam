@@ -1,1 +1,38 @@
-/* Some CSS! */
+body {
+  padding-top: 40px;
+  color: white;
+}
+
+.col-sm-6 {
+  background: #C9082A;
+}
+
+.other {
+  background: #17408b ;
+}
+
+.other2 {
+  background: #C6CFD5;
+}
+
+.p {
+  text-align: center;
+  padding-top: 120px;
+}
+
+.p a {
+  text-decoration: underline;
+  color: blue;
+}
+
+.filter {
+  color: black;
+}
+
+div.frame {
+  width: 500px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #BFBFBF;
+  background-color: white;
+  box-shadow: 10px 10px 5px #041a7e;
+}

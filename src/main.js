@@ -3,6 +3,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { getCurrentPlayers } from './call.js';
+import { getPlayerStats } from './call.js';
 
 // const players = getPlayers();
 
@@ -19,7 +20,7 @@ import { getCurrentPlayers } from './call.js';
 //   player.id === 14
 // })
 
-console.log(getCurrentPlayers());
+
 
 /*
 async function parseData() {
@@ -33,11 +34,14 @@ async function parseData() {
 */
 //console.log(await getPlayerNameIdPos());
 
-// async function doThing() {
-//   console.log(await sortPlayersByPosition());
-// }
+async function test() {
+  const currentPlayers = await getCurrentPlayers();
+  await getPlayerStats(currentPlayers);
+}
 
-// doThing();
+test();
+
+
 
 $(document).ready(function(){
   

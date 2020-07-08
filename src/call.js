@@ -1,4 +1,3 @@
-
 export async function getPlayerNameIdPos () {
   try{
     let currentPage = 15;
@@ -24,7 +23,6 @@ export async function getPlayerNameIdPos () {
         playerData = false;
         console.log(`response: ${response}`);
       }
-
     } while (playerData.meta.next_page);
     return playerIdsAndNames;
   }catch(error){
@@ -35,16 +33,28 @@ export async function getPlayerNameIdPos () {
 
 export async function getPlayerStats (players) {
   try {
+    let statsArray = [];
     let stats;
     for (let i = 0; i < players.length; i++) {
-      // interval to delay api calls
-      let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${players[i].id}`);
-      if (response.ok && response.status == 200) {
-        stats = await response.json();
-        
-      }
+      // timeout to delay api calls
+      setTimeout(async () => {
+        let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${players[i].Id}`);
+        if (response.ok && response.status == 200) {
+          stats = await response.json();
+          const playerStats = {
+            points: stats.data.pts,
+            assists: stats.data.ast,
+            rebounds: stats.data.reb
+          }
+          statsArray.push(playerStats);
+          console.log(statsArray);
+        } else {
+          stats = false;
+          console.log(`response: ${response}`);
+        }
+      }, 2000);
     }
-    return stats;
+    return statsArray;
   } catch(error) {
     console.log(`Uh oh, something bad happened: ${error}`);
     return false;
@@ -54,15 +64,21 @@ export async function getPlayerStats (players) {
 export async function getCurrentPlayers (){
   let allPlayers = await getPlayerNameIdPos(); // an array of objects 
   console.log(allPlayers);
-  //get players by position 
   let currentPlayers = [];
-  // let forwards = [];
-  // let guards = [];
-  // let centers=  [];
   allPlayers.forEach(function(player) {
     if (player.position !== "") {
       currentPlayers.push(player);
     }
+  });
+  console.log(currentPlayers);
+  return currentPlayers;
+}
+
+// export function sortPosition() {
+  // let forwards = [];
+  // let guards = [];
+  // let centers=  [];
+  // allPlayers.forEach(function(player) {
     // if (player.position === 'F' || player.position === 'F-C' || player.position === 'F-G' || player.position === 'G-F' || player.position === 'C-F') {
     //   forwards.push(player);
     // }
@@ -71,36 +87,11 @@ export async function getCurrentPlayers (){
     // }
     // if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
     //   centers.push(player);
-    // }
-  });
-  console.log(currentPlayers);
-  return currentPlayers;
+  // }
+  // }
   // return {
   //   forwards: forwards, 
   //   guards: guards, 
   //   centers: centers
   // }
-}
-
-// console.log(getPlayerNameIdPos());
-
-/*
-export async function getStatsForPlayer(await getAllPlayers(playerName)){
-  try{
-  let statsResponse = await fetch (`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerIds}`);
-  let playerStats;
-  if(statsResponse.ok && statsResponse == 200) {
-    playerStats = await statsResponse.json();
-    console.log(playerStats)
-    return playerStats;
-  } else {
-    playerStats = false; 
-    console.log(statsResponse);
-  }
-  return playerStats;
-  }catch(error){
-  console.log(`error: ${error}`);
-  return false;
-  }
-}
-*/
+// }
