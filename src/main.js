@@ -2,10 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import { newWrapper } from './call.js';
-
-
-
+import {sortPlayersByPosition } from './call.js';
 
 /* Not being used yet
 async function parseData() {
@@ -20,8 +17,7 @@ async function parseData() {
 //console.log(await getPlayerNameIdPos());
 
 async function doThing() {
-
-  console.log(await newWrapper());
+  console.log(await sortPlayersByPosition());
 }
 
 doThing();
@@ -29,4 +25,3 @@ doThing();
 $(document).ready(function(){
   
 });
-

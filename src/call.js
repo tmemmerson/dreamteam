@@ -1,8 +1,7 @@
 
 export async function getPlayerNameIdPos () {
-  console.log("lol");
   try{
-    let currentPage = 28;
+    let currentPage = 15;
     let playerData;
     let playerIdsAndNames = [];
     do {
@@ -19,15 +18,17 @@ export async function getPlayerNameIdPos () {
             team_name: player.team.abbreviation,
             team_Id: player.team.id
           };
-
+          
           return newPlayer;
-        });
-        
+        });        
       } else {
         playerData = false;
         console.log(`response: ${response}`);
       }
+       
+      
     } while (playerData.meta.next_page);
+    console.log(playerIdsAndNames);
     return playerIdsAndNames;
   }catch(error){
     console.log(`error: ${error}`);
@@ -35,42 +36,44 @@ export async function getPlayerNameIdPos () {
   }
 }
 
-
-export async function newWrapper (){
-  let allPlayers = await getPlayerNameIdPos(); // an array of objects 
-  console.log(allPlayers);
+export async function sortPlayersByPosition (){
+  let allPlayers = await getPlayerNameIdPos(); // an array of player objects 
+  console.log(await allPlayers);
   //get players by position 
-  let forwards = [];
-  let guards = [];
-  let centers=  [];
-  let guardCenters=  [];
-  let guardForwards=  [];
-  let forwardCenters=  [];
-  let forwardCen=  [];
+  let forwards = []; //F
+  let guards = [];//G
+  let centers=  [];//C
+  let guardCenters=  []; //G-C C-G
+  let guardForwards=  [];//F-G G-F
+  let forwardCenters=  [];//F-C C-F
   allPlayers.forEach(function(player) {
     if (player.position === 'F') {
       forwards.push(player);
     }
-    if (player.position === 'GF') {
+    if (player.position === 'G') {
       guards.push(player);
     }
     if (player.position === 'C') {
       centers.push(player);
     }
     if (player.position === 'F-C' || player.position === 'C-F') {
-      centers.push(player);
+      forwardCenters.push(player);
     }
-    if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
-      centers.push(player);
+    if (player.position === 'G-C' || player.position === 'C-G' ) {
+      guardCenters.push(player);
     }
-    if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
-      centers.push(player);
+    if (player.position === 'F-G' || player.position === 'G-F') {
+      guardForwards.push(player);
     }
   });
+  console.log(forwards, guards, centers, forwardCenters, guardCenters, guardForwards );
   return {
     forwards: forwards, 
     guards: guards, 
-    centers: centers
+    centers: centers,
+    guardForwards: guardForwards,
+    forwardCenters: forwardCenters,
+    guardCenters: guardCenters,
   }
 }
 
