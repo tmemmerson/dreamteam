@@ -18,17 +18,17 @@ export async function getPlayerNameIdPos () {
             team_name: player.team.abbreviation,
             team_Id: player.team.id
           };
-          
+          //console.log(playerIdsAndNames);being called successfully //returns thousands
+          //console.log(newPlayer); New players being created successfully
           return newPlayer;
         });        
       } else {
         playerData = false;
         console.log(`response: ${response}`);
       }
-       
-      
+
     } while (playerData.meta.next_page);
-    console.log(playerIdsAndNames);
+    console.log(playerIdsAndNames); //returns 68 players in our array
     return playerIdsAndNames;
   }catch(error){
     console.log(`error: ${error}`);
