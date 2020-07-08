@@ -26,7 +26,7 @@ export  async function getPlayerByName (playerName) {
 */
 async function getPlayerNameIdPos () {
   try{
-    let currentPage = 0;
+    let currentPage = 5;
     let playerData;
     let playerIdsAndNames =[];
     do {
@@ -34,7 +34,7 @@ async function getPlayerNameIdPos () {
       currentPage++;
       if (response.ok && response.status == 200){
         playerData = await response.json();
-        playerIdsAndNames = playerData.data.map(player => {
+        playerData.data.forEach(player => {
           const newPlayer = {
             Id: player.id, 
             first_name: player.first_name, 
@@ -43,61 +43,67 @@ async function getPlayerNameIdPos () {
             team_name: player.team.abbreviation,
             team_Id: player.team.id
           };
-          return newPlayer;
+          playerIdsAndNames.push(newPlayer);
         });
-        console.log(playerIdsAndNames);
       } else {
         playerData = false;
         console.log(`response: ${response}`);
       }
     } while (playerData.meta.next_page);
+    return playerIdsAndNames;
   }catch(error){
     console.log(`error: ${error}`);
     return false;
   }
 }
 
-// export async function getPlayerStats (players) {
-//   try {
-//     let stats;
-    
-//     for (let i = 0; i < players.length; i++) {
-//       // interval to delay api calls
-//       let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${players[i].id}`);
-//       if (response.ok && response.status == 200) {
-//         stats = await response.json();
-//         // do something with stats? idk im at a loss here
-//       }
-//     }
-//   } catch(error) {
-//     console.log(`Uh oh, something bad happened: ${error}`);
-//     return false;
-//   }
-// }
+export async function getPlayerStats (players) {
+  try {
+    let stats;
+    for (let i = 0; i < players.length; i++) {
+      // interval to delay api calls
+      let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${players[i].id}`);
+      if (response.ok && response.status == 200) {
+        stats = await response.json();
+        
+      }
+    }
+    return stats;
+  } catch(error) {
+    console.log(`Uh oh, something bad happened: ${error}`);
+    return false;
+  }
+}
 
-export async function newWrapper (){
+export async function getCurrentPlayers (){
   let allPlayers = await getPlayerNameIdPos(); // an array of objects 
   console.log(allPlayers);
   //get players by position 
-  let forwards = [];
-  let guards = [];
-  let centers=  [];
+  let currentPlayers = [];
+  // let forwards = [];
+  // let guards = [];
+  // let centers=  [];
   allPlayers.forEach(function(player) {
-    if (player.position === 'F' || player.position === 'F-C' || player.position === 'F-G' || player.position === 'G-F' || player.position === 'C-F') {
-      forwards.push(player);
+    if (player.position !== "") {
+      currentPlayers.push(player);
     }
-    if (player.position === 'G' || player.position === 'G-C' || player.position === 'F-G' || player.position === 'G-F' || player.position === 'C-G') {
-      guards.push(player);
-    }
-    if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
-      centers.push(player);
-    }
+    // if (player.position === 'F' || player.position === 'F-C' || player.position === 'F-G' || player.position === 'G-F' || player.position === 'C-F') {
+    //   forwards.push(player);
+    // }
+    // if (player.position === 'G' || player.position === 'G-C' || player.position === 'F-G' || player.position === 'G-F' || player.position === 'C-G') {
+    //   guards.push(player);
+    // }
+    // if (player.position === 'C' || player.position === 'F-C' || player.position === 'C-G' || player.position === 'G-C' || player.position === 'C-F') {
+    //   centers.push(player);
+    // }
   });
-  return {
-    forwards: forwards, 
-    guards: guards, 
-    centers: centers
-  }
+  console.log(currentPlayers);
+  return currentPlayers;
+  // return {
+  //   forwards: forwards, 
+  //   guards: guards, 
+  //   centers: centers
+  // }
 }
 
 // console.log(getPlayerNameIdPos());

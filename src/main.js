@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import { newWrapper } from './call.js';
+import { getCurrentPlayers } from './call.js';
 
 // const players = getPlayers();
 
@@ -19,7 +19,7 @@ import { newWrapper } from './call.js';
 //   player.id === 14
 // })
 
-console.log(newWrapper());
+console.log(getCurrentPlayers());
 
 /*
 async function parseData() {
