@@ -1,11 +1,23 @@
 
 body {
-  padding-top: 40px;
+  background-image: url("https://epicodus-emmerson.s3-us-west-2.amazonaws.com/4a.png");
+  padding-top: 200px;
+  padding-left: 400px;
+  border-radius: 10px;
+  font-family: 'Staatliches', cursive;
+  font-size: 20px;
   color: white;
 }
+.title {
+  font-family: 'Teko', sans-serif;
+}
 
+.playerPrint {
+  font-size: 16px;
+}
 .col-sm-6 {
   background: #C9082A;
+  padding: 18px;
 }
 
 .other {

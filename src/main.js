@@ -14,7 +14,7 @@ $(document).ready(function(){
       
       const currentPlayers = await getCurrentPlayers(name);
           for (let i = 0; i < currentPlayers.length; i++) {
-        $("#showPlayers").append('<li>' + currentPlayers[i].first_name + " " + currentPlayers[i].last_name + " - Id Number " + currentPlayers[i].Id + '</li>');
+        $("#showPlayers").append('<li>' + currentPlayers[i].first_name + " " + currentPlayers[i].last_name + " - Id # " + currentPlayers[i].Id + '</li>');
       console.log(currentPlayers);
       }
       
@@ -28,7 +28,7 @@ $(document).ready(function(){
       async function apiCallStats() {
         // retrieves stats based on ID entered
         const playerStats = await getPlayerStats(ID);
-        $('#printStat').text("Points: " + playerStats.points + " Assist: " + playerStats.assists + " Rebounds" + playerStats.rebounds);
+        $('#printStat').text("Points: " + playerStats.points + " Assists: " + playerStats.assists + " Rebounds: " + playerStats.rebounds);
       }
       apiCallStats();
     });
