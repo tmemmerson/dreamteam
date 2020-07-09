@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <h1>Boostrap Grids Demo</h1>
+        <h1>Dream Team NBA Stat Finder</h1>
         <div class="row">
           <div class="col-sm-6 other">
             <h1>Teams</h1>
@@ -71,13 +71,13 @@
           <div class="col-sm-6 other2 filter">
             <h2>Filters</h2>
             <div class="form-group">
-      <label for="targetPlayer">which player do you want stats on?</label>
+  <!--     <label for="targetPlayer">which player do you want stats on?</label>
       <select name="targetPlayer" id="targetPlayer">
         <option value='237'>Lebron James</option>
         <option value='140'>Kevin Durant</option>
-      </select>
+      </select> -->
   
-      <label for="targetPosition">which player do you want stats on?</label>
+      <label for="targetPosition">Player Position</label>
       <select name="targetPosition" id="targetPosition">
         <option value='G'>Guards</option>
         <option value='F'>Forwards</option>
@@ -85,6 +85,10 @@
         <option value='G-F'>Guard-Forwards</option>
         <option value='F-C'>Forward-Centers</option>
       </select>
+      <label for="playerNameSearch">Player Name:</label>
+
+<input type="text" id="playerNameSearch" name="playerNameSearch" required size="24">
+<input type="button" value="search">
     </div>
     <div id="printStat"></div>
           </div>
@@ -94,7 +98,7 @@
         <h2>Player</h2> 
         <div class="frame filter">
           <img src="https://epicodus-emmerson.s3-us-west-2.amazonaws.com/mesh.png" alt="prototype" width="500" height="375">
-          <p class="caption">Your player image</p>
+          <p class="caption">Your player</p>
         </div>
       </div>
     </div>
