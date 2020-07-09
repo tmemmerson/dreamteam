@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="350" height="302" src="https://coding-assets.s3-us-west-2.amazonaws.com/img/Front-Mock-Up.png">
+  <img width="500" height="431" src="https://coding-assets.s3-us-west-2.amazonaws.com/img/Front-Mock-Up.png">
 </p>
 
 <br>
