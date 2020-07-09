@@ -1,10 +1,10 @@
-export async function getPlayerNameIdPos () {
+export async function getPlayerNameIdPos (name) {
   try{
-    let currentPage = 15;
+    let currentPage = 0;
     let playerData;
     let playerIdsAndNames = [];
     do {
-      let response = await fetch (`https://www.balldontlie.io/api/v1/players?per_page=100&page=${currentPage}`);
+      let response = await fetch (`https://www.balldontlie.io/api/v1/players?search=${name}&per_page=100&page=${currentPage}`);
       currentPage++;
       if (response.ok && response.status == 200){
         playerData = await response.json();
@@ -31,38 +31,34 @@ export async function getPlayerNameIdPos () {
   }
 }
 
-export async function getPlayerStats (players) {
+export async function getPlayerStats (Id) {
   try {
-    let statsArray = [];
+    let playerStats;
     let stats;
-    for (let i = 0; i < players.length; i++) {
-      // timeout to delay api calls
-      setTimeout(async () => {
-        let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${players[i].Id}`);
+        let response = await fetch (`https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=${Id}`);
         if (response.ok && response.status == 200) {
           stats = await response.json();
-          const playerStats = {
-            points: stats.data.pts,
-            assists: stats.data.ast,
-            rebounds: stats.data.reb
+          playerStats = {
+            points: stats.data[0].pts,
+            assists: stats.data[0].ast,
+            rebounds: stats.data[0].reb
           }
-          statsArray.push(playerStats);
-          console.log(statsArray);
+        console.log(playerStats);
         } else {
           stats = false;
           console.log(`response: ${response}`);
         }
-      }, 2000);
-    }
-    return statsArray;
+    return playerStats;
   } catch(error) {
     console.log(`Uh oh, something bad happened: ${error}`);
     return false;
   }
 }
 
-export async function getCurrentPlayers (){
-  let allPlayers = await getPlayerNameIdPos(); // an array of objects 
+
+
+export async function getCurrentPlayers (name){
+  let allPlayers = await getPlayerNameIdPos(name); // an array of objects 
   console.log(allPlayers);
   let currentPlayers = [];
   allPlayers.forEach(function(player) {
