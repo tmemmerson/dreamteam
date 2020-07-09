@@ -5,44 +5,39 @@ import './styles.css';
 import { getCurrentPlayers } from './call.js';
 import { getPlayerStats } from './call.js';
 
-// const players = getPlayers();
-
-// players.data = [
-//   {
-//     id: 14,
-//   },
-//   {
-//     id: 15
-//   }
-// ]
-
-// const searchedPlayer = players.data.find(player => {
-//   player.id === 14
-// })
-
-
-
-/*
-async function parseData() {
-  const playerData = await getAllPlayers(); // calls all the player data
-  if(playerData === false) {
-    $("#printStat").Text("I'm sorry there was an error with your request.");
-  } else {
-    $("#printStat").text(`here is your stat ${playerData.data[0].id}`);
-  }
-}
-*/
-//console.log(await getPlayerNameIdPos());
-
-async function test() {
-  const currentPlayers = await getCurrentPlayers();
-  await getPlayerStats(currentPlayers);
-}
-
-test();
-
-
-
 $(document).ready(function(){
-  
+  $("#formSearchPlayerName").submit(function(event) {
+    event.preventDefault();
+    const name = $("input#playerNameSearch").val();
+    
+    async function apiCall() {
+      
+      const currentPlayers = await getCurrentPlayers(name);
+          for (let i = 0; i < currentPlayers.length; i++) {
+        $("#showPlayers").append('<li>' + currentPlayers[i].first_name + " " + currentPlayers[i].last_name + " - Id Number " + currentPlayers[i].Id + '</li>');
+      console.log(currentPlayers);
+      }
+      
+      return false;
+    }
+    apiCall();
+
+    $("#showStatsByPlayerId").submit(function(event) {
+      event.preventDefault();
+      const ID = $("input#IdNumber").val();
+      async function apiCallStats() {
+        // retrieves stats based on ID entered
+        const playerStats = await getPlayerStats(ID);
+        $('#printStat').text("Points: " + playerStats.points + " Assist: " + playerStats.assists + " Rebounds" + playerStats.rebounds);
+      }
+      apiCallStats();
+    });
+    
+  });
 });
+
+async function doThing (){
+console.log(await getPlayerStats(237));
+}
+
+doThing(); 
